@@ -87,7 +87,6 @@ public void OnPlayerRunCmdPost(int client, int buttons, int impulse, const float
 		GetEntPropVector(client, Prop_Data, "m_vecVelocity", vVel);
 		float fVelocity = SquareRoot(Pow(vVel[0], 2.0) + Pow(vVel[1], 2.0));
 		SetHudTextParamsEx(-1.0, 0.65, 0.1, {255, 255, 255, 255}, {0, 0, 0, 255}, 0, 0.0, 0.0, 0.0);
-		
 		if(IsPlayerAlive(client))
 		{
 			if(GetConVarBool(MeterLocation))
@@ -96,8 +95,7 @@ public void OnPlayerRunCmdPost(int client, int buttons, int impulse, const float
 			}
 			else
 			{
-			//PrintCenterText(client, "Speed: %.2f u/s", fVelocity);
-				PrintHintText(client, "Speed: %.2f u/s", fVelocity);
+				PrintHintText(client, "<font color='#FF0000'> Speed</font>:<font color='#00ff00'> %.2f</font> <u/s", fVelocity);
 			}
 		}
 		if(IsClientObserver(client))
@@ -111,12 +109,39 @@ public void OnPlayerRunCmdPost(int client, int buttons, int impulse, const float
 			GetClientName(spectarget, ClientName, 32);
 			if(GetConVarBool(MeterLocation))
 			{
-				ShowHudText(client, 3, "%s's Speed: %.2f u/s", ClientName, fVelocity);
+				if(IsFakeClient(spectarget))
+				{
+					ShowHudText(client, 3, "BOT %s's Speed: %.2f u/s", ClientName, fVelocity);
+				}
+				else
+				{
+					ShowHudText(client, 3, "%s's Speed: %.2f u/s", ClientName, fVelocity);
+				}
 			}
 			else
 			{
-				//PrintCenterText(client, "%s's Speed: %.2f u/s", ClientName, fVelocity);
-				PrintHintText(client, "%s's Speed: %.2f u/s", ClientName, fVelocity);
+				if(IsFakeClient(spectarget))
+				{
+					if (GetClientTeam(spectarget) == 2)
+					{
+						PrintHintText(client, "<font color='#ede749'>BOT %s</font>'s <font color='#FF0000'>Speed</font>: <font color='#00ff00'> %.2f</font> u/s", ClientName, fVelocity);
+					}
+					else
+					{
+						PrintHintText(client, "<font color='#3169c4'>BOT %s</font>'s <font color='#FF0000'>Speed</font>: <font color='#00ff00'> %.2f</font> u/s", ClientName, fVelocity);
+					}
+				}
+				else
+				{
+					if (GetClientTeam(spectarget) == 2)
+					{
+						PrintHintText(client, "<font color='#ede749'>%s</font>'s <font color='#FF0000'>Speed</font>: <font color='#00ff00'> %.2f</font> u/s", ClientName, fVelocity);
+					}
+					else
+					{
+						PrintHintText(client, "<font color='#3169c4'>%s</font>'s <font color='#FF0000'>Speed</font>: <font color='#00ff00'> %.2f</font> u/s", ClientName, fVelocity);
+					}
+				}
 			}
 		}
 	}
