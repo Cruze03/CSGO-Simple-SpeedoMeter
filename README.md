@@ -1,5 +1,6 @@
 # CSGO-Simple-SpeedoMeter
-**DOWNLOAD:- [Click](https://github.com/Cruze03/CSGO-Simple-SpeedoMeter/releases)
+**DOWNLOAD:- [Click](https://github.com/Cruze03/CSGO-Simple-SpeedoMeter/releases)**
+
  Console Command to toggle speedometer(saves your preference): `!speed, !speedmeter, !speedometer`
  
 CVARS-
